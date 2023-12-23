@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
-import Context from "../Context/ThemeContext";
 import darkModeIcon from "../assets/darkmode.svg";
 import lightModeIcon from "../assets/lightmode.svg";
+import Context from "../context/ThemeContext";
 import Dropdown from "./Dropdown";
 
 function Navbar() {

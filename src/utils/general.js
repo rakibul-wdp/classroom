@@ -1,7 +1,6 @@
 function getUsername(ticket, users) {
   const id = ticket?.userId;
   const res = users?.find((item) => item.id === id);
-  console.log(res);
   if (res) {
     return res;
   } else {

@@ -10,7 +10,6 @@ function UserIcon({ username }) {
   const colors = ["#900C3F", "#C70039", "#F1C40F", "#C70039"];
   const randomColor = colors[Math.floor(Math.random() * colors.length)];
   const activeStatus = username?.available;
-  console.log(activeStatus);
   return (
     <div
       className="w-6 h-6 rounded-full text-sm text-light-secondary inline-flex items-center justify-center relative"

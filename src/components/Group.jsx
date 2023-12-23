@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import DisplayContext from "../Context/DisplayContext";
+import DisplayContext from "../context/DisplayContext";
 import Card from "./Card";
 import GroupHeading from "./GroupHeading";
 
@@ -50,7 +50,6 @@ function Group({ data, userDetails, type, val }) {
     });
     setOrderTickets(tickets);
     setCount(countCur);
-    console.log(countCur);
   }
   useEffect(() => {
     groupTickets();
@@ -74,6 +73,7 @@ function Group({ data, userDetails, type, val }) {
                 type={type}
                 user={data?.users}
                 status={index}
+                key={index}
               />
             );
           })}

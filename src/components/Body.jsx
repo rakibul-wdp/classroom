@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
-import DisplayContext from "../Context/DisplayContext";
-import UseAPI from "../Hooks/UseAPI";
+import DisplayContext from "../context/DisplayContext";
+import UseAPI from "../hooks/UseAPI";
 import Group from "./Group";
 
 function Body() {

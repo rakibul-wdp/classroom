@@ -1,6 +1,6 @@
 import CircleIcon from "@mui/icons-material/Circle";
 import React, { useContext } from "react";
-import DisplayContext from "../Context/DisplayContext";
+import DisplayContext from "../context/DisplayContext";
 import { getUsername } from "../utils/general";
 import PriorityIcon from "./PriorityIcon";
 import StatusIcon from "./StatusIcon";

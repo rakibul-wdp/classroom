@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
-import DisplayContext from "../Context/DisplayContext";
-import { useOutsideClick } from "../Hooks/UseOutsideClick";
+import DisplayContext from "../context/DisplayContext";
+import { useOutsideClick } from "../hooks/UseOutsideClick";
 
 function Dropdown() {
   const { grouping, setGrouping, ordering, setOrdering } =
