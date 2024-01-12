@@ -7,10 +7,7 @@ import Toggle from "./elements/Toggle";
 
 export const uiComponents = {
   Input: {
-    element: (
-      rest,
-      { finalValues, setFinalValues, showElement }
-    ) => {
+    element: (rest, { finalValues, setFinalValues, showElement }) => {
       const { uiType, groupKey, isIgnore, ..._rest } = rest;
 
       return (
@@ -44,10 +41,7 @@ export const uiComponents = {
   },
 
   Select: {
-    element: (
-      rest,
-      { finalValues, setFinalValues, showElement }
-    ) => {
+    element: (rest, { finalValues, setFinalValues, showElement }) => {
       const { uiType, groupKey, isIgnore, ..._rest } = rest;
 
       return (
@@ -84,13 +78,7 @@ export const uiComponents = {
   Radio: {
     element: (
       rest,
-      {
-        conditions,
-        setConditions,
-        finalValues,
-        setFinalValues,
-        showElement,
-      }
+      { conditions, setConditions, finalValues, setFinalValues, showElement }
     ) => {
       const { uiType, groupKey, isIgnore, ..._rest } = rest;
 
@@ -114,7 +102,7 @@ export const uiComponents = {
 
             let _finalValues = finalValues;
             delete _finalValues[rest.groupKey];
-            setFinalValues?.(_finalValues!);
+            setFinalValues?.(_finalValues);
 
             if (rest.groupKey)
               setFinalValues?.({
@@ -142,10 +130,7 @@ export const uiComponents = {
   },
 
   Switch: {
-    element: (
-      rest,
-      { finalValues, setFinalValues, showElement }
-    ) => {
+    element: (rest, { finalValues, setFinalValues, showElement }) => {
       const { uiType, groupKey, isIgnore, ..._rest } = rest;
 
       const defaultValue = rest.validate.defaultValue;
@@ -187,10 +172,7 @@ export const uiComponents = {
   },
 
   Group: {
-    element: (
-      rest,
-      { conditions, setConditions }
-    ) => {
+    element: (rest, { conditions, setConditions }) => {
       const requiredComponent = rest.subParameters.filter(
         (comp) => comp.validate.required
       );
@@ -269,8 +251,7 @@ export const uiComponents = {
 
       const value =
         rest.conditions[0].op === "=="
-          ?
-            conditions[rest.conditions[0].jsonKey] === rest.conditions[0].value
+          ? conditions[rest.conditions[0].jsonKey] === rest.conditions[0].value
           : rest.conditions[0].op === ">"
           ? conditions[rest.conditions[0].jsonKey] > rest.conditions[0].value
           : conditions[rest.conditions[0].jsonKey] < rest.conditions[0].value;

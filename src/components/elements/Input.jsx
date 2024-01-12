@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { parseLabel } from "../../../utils/parse-label";
+import { parseLabel } from "../../utils/parse-label";
 import ToolTip from "../ToolTip";
 
 const Input = ({

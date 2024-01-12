@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { AppContext } from "../context/Provider";
 import { uiComponents } from "./UiComponents";
 
@@ -11,8 +11,8 @@ const ElementRenderer = ({
   const { conditions, setConditions, finalValues, setFinalValues } =
     useContext(AppContext);
 
-  if (uiComponents[uiType!])
-    return uiComponents[uiType!].element(
+  if (uiComponents[uiType])
+    return uiComponents[uiType].element(
       {
         uiType,
         isGroup,

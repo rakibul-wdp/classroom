@@ -1,8 +1,8 @@
 import clsx from "clsx";
 import { useState } from "react";
 import RSwitch from "react-switch";
-import { parseLabel } from "../../../utils/parse-label";
 import ToolTip from "../ToolTip";
+import { parseLabel } from "../../utils/parse-label";
 
 const Toggle = ({
   label,
