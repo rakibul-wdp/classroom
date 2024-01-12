@@ -1,7 +1,8 @@
 import clsx from "clsx";
 import { useState } from "react";
-import ToolTip from "../ToolTip";
+import Select from "react-select";
 import { parseLabel } from "../../utils/parse-label";
+import ToolTip from "../ToolTip";
 
 const ListInput = ({
   name,
