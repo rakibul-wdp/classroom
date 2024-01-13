@@ -86,12 +86,11 @@ function App() {
 
   const jsonData = jsonString ? JSON.parse(jsonString) : [];
 
-  // @ts-ignore
   const showAdvancedFields = conditions["showFormAdvancedFields"];
 
   return (
     <div className="grid lg:grid-cols-2 gap-4 lg:gap-0 h-screen p-2">
-      <aside className="p-2 flex flex-col items-start gap-4">
+      <aside className="p-2 flex flex-col items-end gap-4">
         <textarea
           rows={20}
           value={textAreaValue}
@@ -101,7 +100,7 @@ function App() {
         />
 
         <button
-          className="py-2 px-4 text-white font-semibold bg-gray-700 rounded-md"
+          className="py-2 px-4 text-white font-semibold bg-green-500 rounded-md"
           onClick={handleJsonData}
         >
           Generate Form
