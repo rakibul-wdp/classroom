@@ -1,5 +1,10 @@
 import React from "react";
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import {
+  Navigate,
+  Route,
+  BrowserRouter as Router,
+  Routes,
+} from "react-router-dom";
 import PrivateRoute from "./components/Auth/PrivateRoute";
 import ClassroomPage from "./pages/ClassroomPage";
 import Dashboard from "./pages/Dashboard";
@@ -10,6 +15,7 @@ function App() {
   return (
     <Router>
       <Routes>
+        <Route path="/" element={<Navigate to="/dashboard" />} />
         <Route path="/login" element={<LoginPage />} />
         <Route
           path="/dashboard"
