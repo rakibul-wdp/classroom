@@ -1,37 +1,42 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
-import { useAuthContext } from './hooks/useAuthContext'
-
-// pages & components
-import Home from './pages/Home'
-import Login from './pages/Login'
-import Signup from './pages/Signup'
-import Navbar from './components/Navbar'
+import React from "react";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import PrivateRoute from "./components/Auth/PrivateRoute";
+import ClassroomPage from "./pages/ClassroomPage";
+import Dashboard from "./pages/Dashboard";
+import LoginPage from "./pages/LoginPage";
+import UserPage from "./pages/UserPage";
 
 function App() {
-  const { user } = useAuthContext()
-
   return (
-    <div className="App">
-      <BrowserRouter>
-        <Navbar />
-        <div className="pages">
-          <Routes>
-            <Route 
-              path="/" 
-              element={user ? <Home /> : <Navigate to="/login" />} 
-            />
-            <Route 
-              path="/login" 
-              element={!user ? <Login /> : <Navigate to="/" />} 
-            />
-            <Route 
-              path="/signup" 
-              element={!user ? <Signup /> : <Navigate to="/" />} 
-            />
-          </Routes>
-        </div>
-      </BrowserRouter>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/login" element={<LoginPage />} />
+        <Route
+          path="/dashboard"
+          element={
+            <PrivateRoute>
+              <Dashboard />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/classrooms"
+          element={
+            <PrivateRoute>
+              <ClassroomPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/users"
+          element={
+            <PrivateRoute>
+              <UserPage />
+            </PrivateRoute>
+          }
+        />
+      </Routes>
+    </Router>
   );
 }
 
