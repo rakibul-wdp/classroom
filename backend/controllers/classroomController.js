@@ -1,66 +1,74 @@
 const Classroom = require("../models/Classroom");
-const User = require("../models/User");
+const Student = require("../models/Student.js");
+const Teacher = require("../models/Teacher.js");
 
-const createClassroom = async (req, res) => {
-  const { name, startTime, endTime, days } = req.body;
-  const classroom = await Classroom.create({
-    name,
-    startTime,
-    endTime,
-    days,
-  });
-  res.status(201).json(classroom);
-};
+const showExistingClasses = async (req, res) => {
+  const data = await Student.find({});
+  const obj = {};
 
-const getClassrooms = async (req, res) => {
-  const allClassroom = await Classroom.find();
-
-  res.status(201).json(allClassroom);
-};
-
-const assignTeacherToClassroom = async (req, res) => {
-  const { classroomId, teacherId } = req.body;
-  const classroom = await Classroom.findById(classroomId);
-  const teacher = await User.findById(teacherId);
-
-  if (!classroom || !teacher || teacher.role !== "Teacher") {
-    return res.status(404).json({ message: "Classroom or Teacher not found" });
-  }
-
-  classroom.teacher = teacher._id;
-  teacher.classroom = classroom._id;
-  await classroom.save();
-  await teacher.save();
-
-  res.json({ message: "Teacher assigned to classroom" });
-};
-
-const assignStudentsToClassroom = async (req, res) => {
-  const { classroomId, studentIds } = req.body;
-  const classroom = await Classroom.findById(classroomId);
-  const students = await User.find({
-    _id: { $in: studentIds },
-    role: "Student",
+  data.forEach((ele) => {
+    if (obj[ele.classroomName]) {
+      obj[ele.classroomName] = [...obj[ele.classroomName], ele];
+    } else obj[ele.classroomName] = [ele];
   });
 
-  if (!classroom || students.length === 0) {
-    return res.status(404).json({ message: "Classroom or Students not found" });
-  }
-
-  students.forEach(async (student) => {
-    student.classroom = classroom._id;
-    await student.save();
-  });
-
-  classroom.students.push(...students.map((student) => student._id));
-  await classroom.save();
-
-  res.json({ message: "Students assigned to classroom" });
+  res.json(obj);
 };
 
-module.exports = {
-  createClassroom,
-  getClassrooms,
-  assignTeacherToClassroom,
-  assignStudentsToClassroom,
+const createAClass = async (req, res) => {
+  const { className, days } = req.body;
+
+  await Classroom.create({ className, days });
+
+  res.cookie("className", className, { path: "/" }).json({ success: true });
+};
+
+const assigningTeachersAndStudents = async (req, res) => {
+  const { teachers, students } = req.body;
+
+  let { className } = req.cookies;
+
+  await Classroom.findOneAndUpdate(
+    { className },
+    { $set: { teachers, students } }
+  );
+
+  res.json({ success: true });
+};
+
+const gettingAClass = async (req, res) => {
+  let { className } = req.body;
+
+  let data = await Classroom.findOne({ className });
+
+  res.json(data);
+};
+
+const creatingAnAccount = async (req, res) => {
+  const { name, email, password, type } = req.body;
+
+  type.toLowerCase();
+
+  if (type == "student") await Student.create(name, email, password);
+  else await Teacher.create(name, email, password);
+};
+
+const updateAClass = async (req, res) => {
+  let { className, days } = req.body;
+
+  let data = await Classroom.findOneAndUpdate(
+    { className },
+    { $push: { days: days } }
+  );
+
+  if (!data) await Classroom.create({ className, days });
+};
+
+export {
+  assigningTeachersAndStudents,
+  createAClass,
+  creatingAnAccount,
+  gettingAClass,
+  showExistingClasses,
+  updateAClass,
 };
