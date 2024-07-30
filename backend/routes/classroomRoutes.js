@@ -5,11 +5,13 @@ const {
   createClassroom,
   assignTeacherToClassroom,
   assignStudentsToClassroom,
+  getClassrooms,
 } = require("../controllers/classroomController");
 
 const router = express.Router();
 
 router.post("/create", protect, allowRoles("Principal"), createClassroom);
+router.get("/", protect, getClassrooms);
 router.post(
   "/assign-teacher",
   protect,

@@ -12,6 +12,12 @@ const createClassroom = async (req, res) => {
   res.status(201).json(classroom);
 };
 
+const getClassrooms = async (req, res) => {
+  const allClassroom = await Classroom.find();
+
+  res.status(201).json(allClassroom);
+};
+
 const assignTeacherToClassroom = async (req, res) => {
   const { classroomId, teacherId } = req.body;
   const classroom = await Classroom.findById(classroomId);
@@ -54,6 +60,7 @@ const assignStudentsToClassroom = async (req, res) => {
 
 module.exports = {
   createClassroom,
+  getClassrooms,
   assignTeacherToClassroom,
   assignStudentsToClassroom,
 };
