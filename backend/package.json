@@ -9,7 +9,7 @@
     "dev": "nodemon server.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "rakibul-wdp",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.1",
