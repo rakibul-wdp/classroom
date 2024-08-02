@@ -64,7 +64,7 @@ const updateAClass = async (req, res) => {
   if (!data) await Classroom.create({ className, days });
 };
 
-module.export = {
+module.exports = {
   assigningTeachersAndStudents,
   createAClass,
   creatingAnAccount,

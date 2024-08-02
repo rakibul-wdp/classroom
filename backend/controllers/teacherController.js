@@ -27,7 +27,7 @@ const deleteATeacher = async (req, res) => {
   await Teacher.findOneAndDelete({ name });
 };
 
-module.export = {
+module.exports = {
   showAllTeachers,
   createATeacher,
   deleteATeacher,

@@ -33,7 +33,7 @@ const deleteStudent = async (req, res) => {
   }
 };
 
-module.export = {
+module.exports = {
   showAllStudent,
   deleteStudent,
   updateStudent,
