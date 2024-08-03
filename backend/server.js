@@ -5,6 +5,7 @@ const authRoutes = require("./routes/studentRoutes");
 const classroomRoutes = require("./routes/classroomRoutes");
 const userRoutes = require("./routes/teacherRoutes");
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
 
 dotenv.config();
 connectDB();
@@ -12,6 +13,7 @@ connectDB();
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use(cookieParser);
 
 app.use("/api/auth", authRoutes);
 app.use("/api/classrooms", classroomRoutes);
