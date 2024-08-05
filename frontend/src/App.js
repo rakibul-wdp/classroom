@@ -1,46 +1,22 @@
 import React from "react";
-import {
-  Navigate,
-  Route,
-  BrowserRouter as Router,
-  Routes,
-} from "react-router-dom";
-import PrivateRoute from "./components/Auth/PrivateRoute";
-import ClassroomPage from "./pages/ClassroomPage";
-import Dashboard from "./pages/Dashboard";
-import LoginPage from "./pages/LoginPage";
-import UserPage from "./pages/UserPage";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import Assign from "./pages/Assign";
+import Classes from "./pages/Classes";
+import CreateClass from "./pages/CreateClass";
+import Login from "./pages/Login";
+import Students from "./pages/Students";
+import Teachers from "./pages/Teachers";
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Navigate to="/dashboard" />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route
-          path="/dashboard"
-          element={
-            <PrivateRoute>
-              <Dashboard />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/classrooms"
-          element={
-            <PrivateRoute>
-              <ClassroomPage />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/users"
-          element={
-            <PrivateRoute>
-              <UserPage />
-            </PrivateRoute>
-          }
-        />
+        <Route path="/" element={<Login />} />
+        <Route path="/classes" element={<Classes />} />
+        <Route path="/create-class" element={<CreateClass />} />
+        <Route path="/assign" element={<Assign />} />
+        <Route path="/students" element={<Students />} />
+        <Route path="/teachers" element={<Teachers />} />
       </Routes>
     </Router>
   );
