@@ -1,11 +1,11 @@
 import React from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import Assign from "./pages/Assign";
+import Assign from "./pages/PrincipalPage";
 import Classes from "./pages/Classes";
 import CreateClass from "./pages/CreateClass";
-import Login from "./pages/Login";
-import Students from "./pages/Students";
-import Teachers from "./pages/Teachers";
+import Login from "./pages/LoginPage";
+import Students from "./pages/StudentPage";
+import Teachers from "./pages/TeacherPage";
 
 function App() {
   return (
