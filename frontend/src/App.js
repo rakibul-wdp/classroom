@@ -1,22 +1,18 @@
 import React from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import Assign from "./pages/PrincipalPage";
-import Classes from "./pages/Classes";
-import CreateClass from "./pages/CreateClass";
-import Login from "./pages/LoginPage";
-import Students from "./pages/StudentPage";
-import Teachers from "./pages/TeacherPage";
+import LoginPage from "./pages/LoginPage";
+import PrincipalPage from "./pages/PrincipalPage";
+import StudentPage from "./pages/StudentPage";
+import TeacherPage from "./pages/TeacherPage";
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/classes" element={<Classes />} />
-        <Route path="/create-class" element={<CreateClass />} />
-        <Route path="/assign" element={<Assign />} />
-        <Route path="/students" element={<Students />} />
-        <Route path="/teachers" element={<Teachers />} />
+        <Route path="/" element={<LoginPage />} />
+        <Route path="/principal" element={<PrincipalPage />} />
+        <Route path="/teacher" element={<TeacherPage />} />
+        <Route path="/student" element={<StudentPage />} />
       </Routes>
     </Router>
   );

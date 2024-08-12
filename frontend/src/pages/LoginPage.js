@@ -1,75 +1,82 @@
 import axios from "axios";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [role, setRole] = useState("student");
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    role: "",
+  });
   const navigate = useNavigate();
 
-  const handleLogin = async () => {
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:5000/login", {
-        name,
-        email,
-        password,
-        role,
-      });
-      const { data } = response;
-      if (data.principal) {
-        navigate("/principal");
-      } else if (data.classroomAssigned) {
-        navigate("/teacher");
-      } else if (data.classroomName) {
-        navigate("/student");
+      const res = await axios.post("http://localhost:5000/login", formData);
+      if (res.data.principal) {
+        navigate("/classes");
+      } else if (res.data.classroomName || res.data.classroomAssigned) {
+        navigate("/classes");
       }
     } catch (error) {
-      console.error("Login Error:", error);
+      console.error("Invalid login", error);
     }
   };
 
   return (
-    <div className="flex justify-center items-center h-screen">
-      <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-sm">
-        <h1 className="text-xl font-bold mb-4">Login</h1>
+    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <form
+        onSubmit={handleSubmit}
+        className="bg-white p-6 rounded shadow-md w-full max-w-sm"
+      >
+        <h2 className="text-xl font-bold mb-4">Login</h2>
         <input
           type="text"
+          name="name"
           placeholder="Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          className="w-full p-2 mb-2 border border-gray-300 rounded"
+          onChange={handleChange}
+          className="border p-2 mb-4 w-full"
+          required
         />
         <input
           type="email"
+          name="email"
           placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="w-full p-2 mb-2 border border-gray-300 rounded"
+          onChange={handleChange}
+          className="border p-2 mb-4 w-full"
+          required
         />
         <input
           type="password"
+          name="password"
           placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="w-full p-2 mb-2 border border-gray-300 rounded"
+          onChange={handleChange}
+          className="border p-2 mb-4 w-full"
+          required
         />
         <select
-          value={role}
-          onChange={(e) => setRole(e.target.value)}
-          className="w-full p-2 mb-2 border border-gray-300 rounded"
+          name="role"
+          onChange={handleChange}
+          className="border p-2 mb-4 w-full"
         >
+          <option value="">Select Role</option>
           <option value="student">Student</option>
           <option value="teacher">Teacher</option>
+          <option value="principal">Principal</option>
         </select>
         <button
-          onClick={handleLogin}
-          className="w-full p-2 bg-blue-500 text-white rounded"
+          type="submit"
+          className="bg-blue-500 text-white py-2 px-4 rounded"
         >
           Login
         </button>
-      </div>
+      </form>
     </div>
   );
 };
